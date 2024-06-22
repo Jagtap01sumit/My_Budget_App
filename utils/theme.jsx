@@ -5,6 +5,7 @@ export const colors = {
     tertiary: "#4b5563",
     accent: "#0891b2",
     tint: "#111827",
+    tabColor: "#4b5563",
   },
   dark: {
     primary: "#222831",
@@ -12,5 +13,6 @@ export const colors = {
     tertiary: "#00ADB5",
     accent: "#00FFF5",
     tint: "#f9fafb",
+    tabColor: "#00ADB5",
   },
 };

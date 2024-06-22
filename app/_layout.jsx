@@ -9,9 +9,12 @@ export default function HomeLayout() {
     <ThemeContext.Provider
       value={{
         theme,
+        setTheme,
       }}
     >
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
     </ThemeContext.Provider>
   );
 }

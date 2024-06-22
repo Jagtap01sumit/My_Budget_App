@@ -11,10 +11,21 @@ import loginBg from "../../assets/images/loginBg.png";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { colors } from "../../utils/theme";
+import { client } from "../../utils/KindeConfig";
+import service from "../../utils/services";
+import { useRouter } from "expo-router";
 
 export default function index() {
   const { theme, setTheme } = useContext(ThemeContext);
   const activeColors = colors[theme.mode];
+  const router = useRouter();
+  const handleSignIn = async () => {
+    const token = await client.login();
+    if (token) {
+      await service.storeData("login", "true");
+      router.replace("/");
+    }
+  };
   return (
     <View
       style={{
@@ -65,7 +76,7 @@ export default function index() {
             borderRadius: 99,
             marginTop: 30,
           }}
-          onPress={() => console.log("Your Personal Budget Planner")}
+          onPress={handleSignIn}
         >
           <Text style={{ textAlign: "center", color: activeColors.primary }}>
             Login/Signup
