@@ -7,6 +7,8 @@ import { supabase } from "../../utils/supabaseConfig";
 import Header from "../../components/Header";
 import { ThemeContext } from "../../context/ThemeContext";
 import { colors } from "../../utils/theme";
+import CircularChar from "../../components/CircularChar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -45,12 +47,15 @@ export default function Home() {
   return (
     <View
       style={{
-        marginTop: 20,
+        // marginTop: 20,
         padding: 20,
+        paddingTop: 40,
         backgroundColor: activeColors.tertiary,
+        height: 200,
       }}
     >
       <Header />
+      <CircularChar />
     </View>
   );
 }

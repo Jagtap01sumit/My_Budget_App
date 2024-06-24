@@ -19,7 +19,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: activeColors.tabColor,
-        // headerShown: false,
+        headerShown: false,
         headerRight: () => (
           //
           <ToggleSwitch
