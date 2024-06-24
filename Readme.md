@@ -1,20 +1,20 @@
-### adb pair 192.168.0.100:36353
+##### adb pair 192.168.0.100:36353
 
-### adb connect 192.168.0.100:46725
+#### adb connect 192.168.0.100:46725
 
-### scrcpy
+##### scrcpy
 
 ## Installation :
 
 ### https://docs.expo.dev/router/installation/
 
-## Installation of AsyncStorage (local storage) :
+### Installation of AsyncStorage (local storage) :
 
-### https://docs.expo.dev/versions/latest/sdk/async-storage/
+#### https://docs.expo.dev/versions/latest/sdk/async-storage/
 
-### https://react-native-async-storage.github.io/async-storage/docs/usage/
+#### https://react-native-async-storage.github.io/async-storage/docs/usage/
 
-### https://docs.kinde.com/developer-tools/sdks/native/react-native-sdk/
+#### https://docs.kinde.com/developer-tools/sdks/native/react-native-sdk/
 
 ```javascript
 

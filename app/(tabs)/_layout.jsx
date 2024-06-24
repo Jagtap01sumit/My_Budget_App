@@ -7,7 +7,7 @@ import { colors } from "../../utils/theme";
 import ToggleSwitch from "toggle-switch-react-native";
 export default function TabLayout() {
   const { theme, setTheme } = useContext(ThemeContext);
-  const [isOn, setIsOn] = useState(theme.mode === "dark");
+  const [isOn, setIsOn] = useState(theme.mode === "light");
   const activeColors = colors[theme.mode];
   const toggleTheme = () => {
     setTheme((prevTheme) => ({
@@ -24,12 +24,12 @@ export default function TabLayout() {
           //
           <ToggleSwitch
             isOn={isOn}
-            onColor="#3A3A3C"
             offColor="#D1D1D6"
+            onColor="#3A3A3C"
             size="medium"
             onToggle={toggleTheme}
             style={{ marginRight: 10 }}
-            animationSpeed={400}
+            animationSpeed={300}
           />
         ),
       }}
