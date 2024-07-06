@@ -12,9 +12,17 @@ export default function CircularChar() {
   const [values, setValues] = useState([1]);
   const [sliceColor, setSliceColor] = useState([activeColors.secondary]);
   return (
-    <View style={[styles.container, { backgroundColor: activeColors.primary }]}>
-      <Text style={{ fontSize: 20, color: activeColors.tertiary }}>
-        Total Estimate : <Text style={{ fontWeight: "bold" }}>0$</Text>
+    <View
+      style={[styles.container, { backgroundColor: activeColors.tertiary }]}
+    >
+      <Text
+        style={{
+          fontSize: 20,
+          color: activeColors.text,
+          fontFamily: "outfit-regular",
+        }}
+      >
+        Total Estimate : <Text style={{ fontFamily: "outfit-bold" }}>0$</Text>
       </Text>
       <View style={styles.subContainer}>
         <PieChart
@@ -22,7 +30,7 @@ export default function CircularChar() {
           series={values}
           sliceColor={sliceColor}
           coverRadius={0.65}
-          coverFill={activeColors.primary}
+          coverFill={activeColors.tertiary}
         />
         <View
           style={{
@@ -35,9 +43,10 @@ export default function CircularChar() {
           <MaterialCommunityIcons
             name="checkbox-blank-circle"
             size={24}
-            color={activeColors.tertiary}
+            color={activeColors.secondary}
           />
-          <Text style={{ color: activeColors.tertiary }}>NA</Text>
+          {/* <Text style={{ color: activeColors.tertiary }}>{theme.mode}</Text> */}
+          <Text style={{ color: activeColors.secondary }}>NA</Text>
         </View>
       </View>
     </View>

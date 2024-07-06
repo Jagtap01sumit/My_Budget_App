@@ -26,6 +26,7 @@ export default function Header() {
         flexDirection: "row",
         gap: 8,
         alignItems: "center",
+
         // justifyContent: "space-between",
       }}
     >
@@ -49,20 +50,26 @@ export default function Header() {
         }}
       >
         <View>
-          <Text style={{ color: activeColors.primary, fontSize: 16 }}>
+          <Text
+            style={{
+              color: activeColors.text,
+              fontSize: 16,
+              fontFamily: "outfit-regular",
+            }}
+          >
             Welcome
           </Text>
           <Text
             style={{
-              color: activeColors.primary,
+              color: activeColors.text,
               fontSize: 20,
-              fontWeight: "bold",
+              fontFamily: "outfit-bold",
             }}
           >
             {user?.given_name}
           </Text>
         </View>
-        <Ionicons name="notifications" size={24} color={activeColors.tint} />
+        <Ionicons name="notifications" size={24} color={activeColors.text} />
       </View>
     </View>
   );
