@@ -1,10 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { supabase } from "../utils/supabaseConfig";
-
+import { Ionicons } from "@expo/vector-icons";
+import CourseInfo from "../components/CourseDetails/CourseInfo";
+import CourseItermList from "../components/CourseDetails/CourseItermList";
 export default function categoryDetails() {
   const { categoryId } = useLocalSearchParams();
+  const [categoryData, setCategoryData] = useState([]);
+
+  const router = useRouter();
   useEffect(() => {
     console.log(categoryId);
     getCategoryDetails();
@@ -17,12 +22,18 @@ export default function categoryDetails() {
       .eq("id", categoryId);
     if (error) {
       console.log(error);
+    } else {
+      setCategoryData(data[0]);
+      console.log(categoryData);
     }
-    console.log("ca9t", data);
   };
   return (
-    <View>
-      <Text>categpry-details</Text>
+    <View style={{ padding: 20, marginTop: 20 }}>
+      <TouchableOpacity onPress={() => router.back()}>
+        <Ionicons name="arrow-back-circle" size={34} color="black" />
+      </TouchableOpacity>
+      <CourseInfo categoryData={categoryData} />
+      <CourseItermList categoryData={categoryData} />
     </View>
   );
 }

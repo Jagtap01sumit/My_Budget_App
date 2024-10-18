@@ -1,5 +1,6 @@
 import {
   Button,
+  Image,
   RefreshControl,
   ScrollView,
   StyleSheet,
@@ -24,7 +25,7 @@ export default function Home() {
   const router = useRouter();
   const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const img = require("../../assets/images/loading.png");
   useEffect(() => {
     checkUserAuth();
     getCategoryList();
@@ -67,8 +68,15 @@ export default function Home() {
   return (
     <View style={{ flex: 1 }}>
       {loading && (
-        <View style={{ height: "100%" }}>
-          <Text>Loading</Text>
+        <View
+          style={{
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Image source={img} style={{ height: 100, width: 100 }}></Image>
         </View>
       )}
       <ScrollView
