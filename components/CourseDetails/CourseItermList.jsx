@@ -1,12 +1,17 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { act, useContext } from "react";
 import { colors } from "../../utils/theme";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function CourseItemList({ categoryData }) {
   console.log(categoryData.categoryitems, "catdata");
+  const { theme } = useContext(ThemeContext);
+  const activeColors = colors[theme.mode];
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.heading}>Item List</Text>
+      <Text style={[styles.heading, { color: activeColors.text }]}>
+        Item List
+      </Text>
       <View style={{ marginTop: 15 }}>
         {categoryData?.categoryitems?.length > 0 ? (
           categoryData.categoryitems.map((item, inx) => {
@@ -15,12 +20,16 @@ export default function CourseItemList({ categoryData }) {
                 <View style={styles.itemContainer}>
                   <Image source={{ uri: item.image }} style={styles.image} />
                   <View style={{ flex: 1, marginLeft: 10 }}>
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Text style={[styles.url, { color: colors.light.accent }]}>
+                    <Text style={[styles.name, { color: activeColors.text }]}>
+                      {item.name}
+                    </Text>
+                    <Text style={[styles.url, { color: activeColors.text }]}>
                       {item.url}
                     </Text>
                   </View>
-                  <Text style={styles.cost}> $ {item.cost}</Text>
+                  <Text style={[styles.cost, { color: activeColors.text }]}>
+                    $ {item.cost}
+                  </Text>
                 </View>
                 {categoryData.categoryitems.length - 1 !== inx && (
                   <View
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "center",
+    alignItems: "center",
   },
   name: {
     fontSize: 20,

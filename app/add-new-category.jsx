@@ -15,6 +15,7 @@ import { Foundation } from "@expo/vector-icons";
 import { supabase } from "../utils/supabaseConfig";
 import { client } from "../utils/KindeConfig";
 import { useRouter } from "expo-router";
+import { ActivityIndicator } from "react-native-web";
 
 export default function AddNewCategory() {
   const { theme } = useContext(ThemeContext);
@@ -23,8 +24,10 @@ export default function AddNewCategory() {
   const [selectedColor, setSelectedColor] = useState(activeColors.primary);
   const [categoryName, setCategoryName] = useState("");
   const [totalBudget, setTotalBudget] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const onCreateCategory = async () => {
+    setLoading(true);
     const user = await client.getUserDetails();
 
     const { data, error } = await supabase
@@ -48,7 +51,9 @@ export default function AddNewCategory() {
           categoryId: data[0].id,
         },
       });
+
       ToastAndroid.show("Category Created Successfully", ToastAndroid.SHORT);
+      setLoading(false);
       setCategoryName("");
       setTotalBudget("");
       setSelectedIcon("");
@@ -115,16 +120,20 @@ export default function AddNewCategory() {
         disabled={!categoryName || !totalBudget}
         onPress={onCreateCategory}
       >
-        <Text
-          style={{
-            color: activeColors.text,
-            textAlign: "center",
-            fontSize: 16,
-            fontWeight: "bold",
-          }}
-        >
-          Create
-        </Text>
+        {loading ? (
+          <ActivityIndicator />
+        ) : (
+          <Text
+            style={{
+              color: activeColors.text,
+              textAlign: "center",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            Create
+          </Text>
+        )}
       </TouchableOpacity>
     </View>
   );

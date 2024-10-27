@@ -1,11 +1,67 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useContext } from "react";
+import { Alert, StyleSheet, Text, ToastAndroid, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../utils/theme";
 import { ThemeContext } from "../../context/ThemeContext";
+import { TouchableOpacity } from "react-native";
+import { supabase } from "../../utils/supabaseConfig";
+import { router, useRouter } from "expo-router";
+
 export default function CourseInfo({ categoryData }) {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const activeColors = colors[theme.mode];
+  const router = useRouter();
+  const [totalCost, setTotalCost] = useState(0);
+  const [percTotal, setPercTotal] = useState(0);
+
+  useEffect(() => {
+    if (categoryData) {
+      calculateTotalPerc();
+    }
+  }, [categoryData]);
+
+  const calculateTotalPerc = () => {
+    let total = 0;
+
+    categoryData?.categoryitems?.forEach((item) => {
+      total += item.cost || 0;
+    });
+
+    setTotalCost(total);
+
+    if (categoryData.assigned_budget > 0) {
+      let perc = (total / categoryData.assigned_budget) * 100;
+
+      if (perc > 100) {
+        perc = 100;
+      }
+      setPercTotal(perc);
+    } else {
+      setPercTotal(0);
+    }
+  };
+  const onDeleteCategory = () => {
+    Alert.alert("Are you Sure", "Do you really want to delete this category", [
+      {
+        text: "Cancle",
+        styles: "cancel",
+      },
+      {
+        text: "Yes",
+        style: "destructive",
+        onPress: async () => {
+          const { error } = await supabase
+            .from("categoryitems")
+            .delete()
+            .eq("category_id", categoryData);
+
+          await supabase.from("category").delete().eq("id", categoryData.id);
+          ToastAndroid.show("Category Deleted!", ToastAndroid.SHORT);
+          router.replace("/(tabs)");
+        },
+      },
+    ]);
+  };
   return (
     <View>
       <View style={styles.container}>
@@ -17,17 +73,25 @@ export default function CourseInfo({ categoryData }) {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={styles.categoryName}>{categoryData?.name}</Text>
-          <Text style={styles.categoryItemText}>
+          <Text style={[styles.categoryName, { color: activeColors.text }]}>
+            {categoryData?.name}
+          </Text>
+          <Text style={[styles.categoryItemText, { color: activeColors.text }]}>
             {categoryData?.categoryitems?.length} item
           </Text>
         </View>
-        <Ionicons name="trash-bin-sharp" size={24} color="red" />
+        <TouchableOpacity onPress={() => onDeleteCategory()}>
+          <Ionicons name="trash-bin-sharp" size={24} color="red" />
+        </TouchableOpacity>
       </View>
-      {/* progreee bar  */}
-      <View style={styles.amountContainer}>
-        <Text>$500</Text>
-        <Text style={{ fontFamily: "outfit-normal" }}>
+      <View style={[styles.amountContainer, { color: activeColors.text }]}>
+        <Text style={{ color: activeColors.text }}>$ {totalCost}</Text>
+        <Text
+          style={[
+            { color: activeColors.text },
+            { fontFamily: "outfit-normal" },
+          ]}
+        >
           Total Budget : {categoryData.assigned_budget}
         </Text>
       </View>
@@ -35,9 +99,9 @@ export default function CourseInfo({ categoryData }) {
         <View
           style={[
             styles.progressBarSubContainer,
-            { backgroundColor: activeColors.primary },
+            { backgroundColor: activeColors.primary, width: `${percTotal}%` }, // Set width as a percentage
           ]}
-        ></View>
+        />
       </View>
     </View>
   );
@@ -46,7 +110,6 @@ export default function CourseInfo({ categoryData }) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -67,10 +130,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   amountContainer: {
-    display: "flex",
+    flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 15,
-    flexDirection: "row",
   },
   progressBarMainContainer: {
     width: "100%",
@@ -80,8 +142,6 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
   progressBarSubContainer: {
-    width: "40%",
-
     borderRadius: 99,
     height: 15,
   },
