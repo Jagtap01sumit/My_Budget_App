@@ -46,11 +46,14 @@ export default function categoryDetails() {
         backgroundColor: activeColors.secondary,
       }}
     >
-      <TouchableOpacity onPress={() => router.back()}>
+      <TouchableOpacity onPress={() => router.replace("/(tabs)")}>
         <Ionicons name="arrow-back-circle" size={34} color="black" />
       </TouchableOpacity>
       <CourseInfo categoryData={categoryData} />
-      <CourseItermList categoryData={categoryData} />
+      <CourseItermList
+        categoryData={categoryData}
+        setUpdatedRecord={() => getCategoryDetails()}
+      />
 
       <Link
         href={{
