@@ -17,4 +17,16 @@ export const colors = {
     tabColor: "#4b5563",
     text: "white",
   },
+  COLOR_LIST: [
+    "#FF6B6B", // coral red
+    "#FFD93D", // sunflower yellow
+    "#1B998B", // emerald green
+    "#F46036", // rich orange
+    "#2E4057", // steel blue-gray
+    "#7F5A83", // soft mauve
+    "#3D348B", // royal purple
+    "#4ECDC4", // aqua cyan
+    "#FF6347", // tomato red
+    "#3C1642", // plum black
+  ],
 };

@@ -16,6 +16,14 @@ export default function CategoryList({ categoryList }) {
       },
     });
   };
+
+  const calculateTotalCost = (categoryitems) => {
+    let totalCost = 0;
+    categoryitems?.forEach((item) => {
+      totalCost = totalCost + item.cost;
+    });
+    return totalCost;
+  };
   return (
     <View style={{ marginTop: 20 }}>
       <Text
@@ -67,7 +75,7 @@ export default function CategoryList({ categoryList }) {
                 <Text
                   style={[styles.totalAmountText, { color: activeColors.text }]}
                 >
-                  $5000
+                  $ {calculateTotalCost(category.categoryitems )}
                 </Text>
               </View>
             </TouchableOpacity>

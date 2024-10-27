@@ -98,7 +98,7 @@ export default function Home() {
           <Header />
         </View>
         <View style={{ padding: 20, marginTop: -115 }}>
-          <CircularChar />
+          <CircularChar categoryList={categoryList} />
           <CategoryList categoryList={categoryList} />
         </View>
       </ScrollView>
