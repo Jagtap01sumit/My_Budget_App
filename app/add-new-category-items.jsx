@@ -108,9 +108,21 @@ export default function AddNewCategoryItems() {
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView style={{ padding: 20 }}>
-        <TouchableOpacity onPress={() => onImagePick()}>
-          <Image source={{ uri: previewImage }} style={styles.image} />
+      <ScrollView
+        style={{
+          padding: 20,
+          height: "100%",
+          backgroundColor: activeColors.primary,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => onImagePick()}
+          // style={{ padding: 10, margin: 10 }}
+        >
+          <Image
+            source={{ uri: previewImage }}
+            style={[styles.image, { padding: 10 }]}
+          />
         </TouchableOpacity>
         <View style={styles.textInputContainer}>
           <Ionicons name="pricetag" size={24} color="black" />
@@ -147,7 +159,7 @@ export default function AddNewCategoryItems() {
           />
         </View>
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: activeColors.primary }]}
+          style={[styles.button, { backgroundColor: activeColors.tertiary }]}
           disabled={!name || !cost || loading}
           onPress={() => OnClickAdd()}
         >
@@ -174,8 +186,9 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
-    backgroundColor: "gray",
+    backgroundColor: "white",
     borderRadius: 15,
+    padding: 10,
   },
   textInputContainer: {
     padding: 10,
@@ -186,6 +199,7 @@ const styles = StyleSheet.create({
     gap: 10,
     alignItems: "center",
     borderRadius: 10,
+    backgroundColor: "white",
   },
   input: {
     fontSize: 17,

@@ -86,25 +86,26 @@ export default function Home() {
             refreshing={loading}
           />
         }
+        style={{ backgroundColor: activeColors.primary }}
       >
         <View
           style={{
             padding: 20,
-            paddingTop: 40,
-            backgroundColor: activeColors.primary,
-            height: 200,
+            paddingTop: 100,
+            backgroundColor: activeColors.tertiary,
+            height: 250,
           }}
         >
           <Header />
         </View>
-        <View style={{ padding: 20, marginTop: -115 }}>
+        <View style={{ padding: 20, marginTop: -105 }}>
           <CircularChar categoryList={categoryList} />
           <CategoryList categoryList={categoryList} />
         </View>
       </ScrollView>
       <View style={styles.adBtnContainer}>
         <Link href={"/add-new-category"}>
-          <Ionicons name="add-circle" size={74} color={activeColors.accent} />
+          <Ionicons name="add-circle" size={84} color={activeColors.tertiary} />
         </Link>
       </View>
     </View>
@@ -112,5 +113,5 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  adBtnContainer: { position: "absolute", bottom: 16, right: 16 },
+  adBtnContainer: { position: "absolute", bottom: 80, right: 26 },
 });

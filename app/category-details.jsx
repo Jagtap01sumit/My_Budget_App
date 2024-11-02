@@ -43,11 +43,15 @@ export default function categoryDetails() {
         padding: 30,
         // marginTop: 20,
         flex: 1,
-        backgroundColor: activeColors.secondary,
+        backgroundColor: activeColors.primary,
       }}
     >
       <TouchableOpacity onPress={() => router.replace("/(tabs)")}>
-        <Ionicons name="arrow-back-circle" size={34} color="black" />
+        <Ionicons
+          name="arrow-back-circle"
+          size={34}
+          color={activeColors.tertiary}
+        />
       </TouchableOpacity>
       <CourseInfo categoryData={categoryData} />
       <CourseItermList
@@ -64,7 +68,7 @@ export default function categoryDetails() {
         }}
         style={styles.floatingBtn}
       >
-        <Ionicons name="add-circle" size={60} color={activeColors.text} />
+        <Ionicons name="add-circle" size={60} color={activeColors.tertiary} />
       </Link>
     </View>
   );

@@ -23,6 +23,8 @@ export default function HomeLayout() {
           name="add-new-category"
           options={{
             presentation: "modal",
+            // style:{{backgroundColor:"transparent"}},
+
             headerShown: true,
             headerTitle: "Add New Category",
           }}

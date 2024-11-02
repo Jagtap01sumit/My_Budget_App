@@ -27,7 +27,12 @@ export default function CategoryList({ categoryList }) {
   return (
     <View style={{ marginTop: 20 }}>
       <Text
-        style={{ fontFamily: "outfit-bold", fontSize: 25, marginBottom: 10 }}
+        style={{
+          fontFamily: "outfit-bold",
+          fontSize: 25,
+          marginBottom: 10,
+          color: activeColors.text,
+        }}
       >
         Latest Budget
       </Text>
@@ -42,7 +47,7 @@ export default function CategoryList({ categoryList }) {
               style={[
                 styles.container,
                 {
-                  backgroundColor: activeColors.secondary,
+                  // backgroundColor: activeColors.secondary,
                 },
               ]}
             >
@@ -75,7 +80,7 @@ export default function CategoryList({ categoryList }) {
                 <Text
                   style={[styles.totalAmountText, { color: activeColors.text }]}
                 >
-                  $ {calculateTotalCost(category.categoryitems )}
+                  $ {calculateTotalCost(category.categoryitems)}
                 </Text>
               </View>
             </TouchableOpacity>

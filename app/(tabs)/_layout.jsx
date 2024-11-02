@@ -1,46 +1,71 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import React, { act, useContext, useState } from "react";
+import { Button, StyleSheet, Text, View, Image } from "react-native";
+import React, { useContext, useState } from "react";
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { ThemeContext } from "../../context/ThemeContext";
 import { colors } from "../../utils/theme";
 import ToggleSwitch from "toggle-switch-react-native";
+
 export default function TabLayout() {
   const { theme, setTheme } = useContext(ThemeContext);
   const [isOn, setIsOn] = useState(theme.mode === "dark");
   const activeColors = colors[theme.mode];
+  const [activeTab, setActiveTab] = useState("index");
+
   const toggleTheme = () => {
     setTheme((prevTheme) => ({
       mode: prevTheme.mode === "dark" ? "light" : "dark",
     }));
     setIsOn(!isOn);
   };
+
+  const CustomHeader = ({ title }) => (
+    <View style={[styles.header, { backgroundColor: activeColors.primary }]}>
+      <View style={styles.headerContent}>
+        <Image
+          source={require("../../assets/images/logo.png")}
+          style={styles.logo}
+        />
+        <Text style={[styles.headerTitle, { color: activeColors.text }]}>
+          {title}
+        </Text>
+      </View>
+      {activeTab === "index" && (
+        <ToggleSwitch
+          isOn={isOn}
+          offColor="#D1D1D6"
+          onColor="gray"
+          size="medium"
+          onToggle={toggleTheme}
+          animationSpeed={300}
+          style={{ marginRight: 10 }}
+        />
+      )}
+    </View>
+  );
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: activeColors.tabColor,
-        // headerShown: false,
-        headerRight: () => (
-          //
-          <ToggleSwitch
-            isOn={isOn}
-            offColor="#D1D1D6"
-            onColor="#3A3A3C"
-            size="medium"
-            onToggle={toggleTheme}
-            style={{ marginRight: 10 }}
-            animationSpeed={300}
-          />
-        ),
+        tabBarInactiveTintColor: activeColors.inactiveColor,
+        header: () => <CustomHeader title="Plan My Budget" />,
       }}
+      onTabPress={({ name }) => setActiveTab(name)}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+          tabBarStyle: styles.tabstyle,
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome
+              size={28}
+              name="home"
+              color={
+                focused ? activeColors.tabColor : activeColors.inactiveColor
+              }
+            />
           ),
         }}
       />
@@ -48,8 +73,15 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="user" size={24} color={color} />
+          tabBarStyle: styles.tabstyle,
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome
+              name="user"
+              size={24}
+              color={
+                focused ? activeColors.tabColor : activeColors.inactiveColor
+              }
+            />
           ),
         }}
       />
@@ -57,8 +89,15 @@ export default function TabLayout() {
         name="history"
         options={{
           title: "History",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="history" size={24} color={color} />
+          tabBarStyle: styles.tabstyle,
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome
+              name="history"
+              size={24}
+              color={
+                focused ? activeColors.tabColor : activeColors.inactiveColor
+              }
+            />
           ),
         }}
       />
@@ -66,4 +105,50 @@ export default function TabLayout() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabstyle: {
+    position: "absolute",
+    bottom: 15,
+    left: 20,
+    right: 20,
+    elevation: 10,
+    borderRadius: 20,
+    shadowColor: "#000000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    overflow: "hidden",
+    paddingBottom: 5,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+
+    borderRadius: 30,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    marginHorizontal: 15,
+    marginTop: 20,
+
+    position: "absolute",
+    left: 0,
+    right: 0,
+  },
+  headerContent: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  logo: {
+    width: 60,
+    height: 60,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});

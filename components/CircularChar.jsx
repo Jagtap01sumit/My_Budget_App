@@ -57,7 +57,7 @@ export default function CircularChar({ categoryList }) {
 
   return (
     <View
-      style={[styles.container, { backgroundColor: activeColors.tertiary }]}
+      style={[styles.container, { backgroundColor: activeColors.secondary }]}
     >
       <Text
         style={{
@@ -75,7 +75,7 @@ export default function CircularChar({ categoryList }) {
           series={values}
           sliceColor={sliceColor}
           coverRadius={0.65}
-          coverFill={activeColors.tertiary}
+          coverFill={activeColors.secondary}
         />
         {categoryList.length === 0 ? (
           <View style={styles.chartNameContainer}>
@@ -115,7 +115,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 20,
     borderRadius: 15,
-    elevation: 1,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 15,
+    backgroundColor: "#fff",
   },
   subContainer: {
     marginTop: 10,
