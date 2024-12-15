@@ -20,7 +20,7 @@ export default function TabLayout() {
   };
 
   const CustomHeader = ({ title }) => (
-    <View style={[styles.header, { backgroundColor: activeColors.primary }]}>
+    <View style={[styles.header, {}]}>
       <View style={styles.headerContent}>
         <Image
           source={require("../../assets/images/logo.png")}
@@ -49,9 +49,10 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: activeColors.tabColor,
         tabBarInactiveTintColor: activeColors.inactiveColor,
-        header: () => <CustomHeader title="Plan My Budget" />,
       }}
-      onTabPress={({ name }) => setActiveTab(name)}
+      onTabPress={({ name }) => {
+        setActiveTab(name);
+      }}
     >
       <Tabs.Screen
         name="index"
@@ -67,6 +68,8 @@ export default function TabLayout() {
               }
             />
           ),
+          tabBarLabel: () => null,
+          header: () => <CustomHeader title="Plan My Budget" />,
         }}
       />
       <Tabs.Screen
@@ -83,6 +86,8 @@ export default function TabLayout() {
               }
             />
           ),
+          tabBarLabel: () => null,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -99,6 +104,8 @@ export default function TabLayout() {
               }
             />
           ),
+          tabBarLabel: () => null,
+          headerShown: false,
         }}
       />
     </Tabs>
@@ -111,21 +118,28 @@ const styles = StyleSheet.create({
     bottom: 15,
     left: 20,
     right: 20,
-    elevation: 10,
+    elevation: 90,
     borderRadius: 20,
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderColor: "white",
     shadowColor: "#000000",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 10,
     overflow: "hidden",
     paddingBottom: 5,
+    borderColor: "white",
+    borderWidth: 2,
+    shadowColor: "#ffffff",
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 5,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 10,
-
     borderRadius: 30,
     elevation: 5,
     shadowColor: "#000",
@@ -134,7 +148,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     marginHorizontal: 15,
     marginTop: 20,
-
     position: "absolute",
     left: 0,
     right: 0,

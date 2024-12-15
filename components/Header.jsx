@@ -26,8 +26,6 @@ export default function Header() {
         flexDirection: "row",
         gap: 8,
         alignItems: "center",
-
-        // justifyContent: "space-between",
       }}
     >
       <Image

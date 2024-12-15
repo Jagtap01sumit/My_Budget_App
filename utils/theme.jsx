@@ -5,8 +5,8 @@ export const colors = {
     tertiary: "#FFCEAD",
     accent: "#0891b2",
     tertiary: "#FFCEAD",
-    tabColor: "#FFCEAD",
-    inactiveColor: "#867AE9",
+    tabColor: "#FFF5AB",
+    inactiveColor: "dark",
     text: "black",
   },
   dark: {
@@ -14,8 +14,8 @@ export const colors = {
     secondary: "#393E46",
     tertiary: "#FD7014",
     accent: "#0891b2",
-    tabColor: "#FD7014",
-    inactiveColor: "#222831",
+    tabColor: "#FFD700",
+    inactiveColor: "white",
     text: "white",
   },
   COLOR_LIST: [
