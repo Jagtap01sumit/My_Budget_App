@@ -130,16 +130,8 @@ export default function Profile() {
           )}
 
           {currentView === "privacy" && (
-            <View style={{ flex: 1 }}>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => switchView("main")}
-              >
-                <Text style={[styles.backText, { color: activeColors.text }]}>
-                  Back
-                </Text>
-              </TouchableOpacity>
-              <PrivacyCon />
+            <View style={[{ backgroundColor: activeColors.secondary }]}>
+              <PrivacyCon switchView={switchView} />
             </View>
           )}
 
@@ -174,7 +166,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   innerContainer: {
-    // flex: 1,
+    flex: 1,
     marginVertical: 30,
     borderRadius: 10,
     overflow: "hidden",
@@ -198,18 +190,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
   },
+
   placeholderText: {
     fontSize: 16,
     textAlign: "center",
     marginTop: 20,
   },
-  backButton: {
-    padding: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 8,
-    alignSelf: "flex-start",
-    marginBottom: 15,
-  },
+
   backText: {
     fontSize: 16,
     fontWeight: "500",

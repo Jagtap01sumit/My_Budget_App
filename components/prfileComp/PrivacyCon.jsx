@@ -8,16 +8,24 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { colors } from "../../utils/theme";
 import { TouchableOpacity } from "react-native";
 
-const PrivacyCon = () => {
+const PrivacyCon = ({ switchView }) => {
   const { theme } = useContext(ThemeContext);
   const [activeButton, setActiveButton] = useState("HumanFriendly");
   const navigation = useNavigation();
   let activeColors = colors[theme.mode];
   return (
-    <SafeAreaView style={{ backgroundColor: activeColors.primary, flex: 1 }}>
-      <ScrollView style={{ margin: 10, paddingTop: 40 }}>
+    <SafeAreaView style={{ backgroundColor: activeColors.primary }}>
+      <ScrollView style={{ margin: 10 }}>
         <Pressable onPress={() => navigation.goBack()}></Pressable>
         <View style={{ display: "flex" }}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => switchView("main")}
+          >
+            <Text style={[styles.backText, { color: activeColors.text }]}>
+              Back
+            </Text>
+          </TouchableOpacity>
           <Text
             style={{
               fontSize: 32,
@@ -33,7 +41,7 @@ const PrivacyCon = () => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            marginTop: 20,
+            // marginTop: 20,
           }}
         >
           <TouchableOpacity
@@ -349,7 +357,7 @@ const PrivacyCon = () => {
             </Text>
             <Text
               style={{
-                fontSize: 3,
+                fontSize: 30,
                 marginTop: 20,
                 fontWeight: "bold",
                 color: activeColors.text,
@@ -365,8 +373,8 @@ const PrivacyCon = () => {
               }}
             >
               If you have any questions or suggestions about our Privacy Policy,
-              do not hesitate to contact us at 9128728865 or
-              srnikharge668@gmail.conm.
+              do not hesitate to contact us at 91896712782 or
+              planmybudget@gmail.conm.
             </Text>
             <Text
               style={{
@@ -388,4 +396,12 @@ const PrivacyCon = () => {
 
 export default PrivacyCon;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  backButton: {
+    padding: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 8,
+    alignSelf: "flex-start",
+    marginBottom: 5,
+  },
+});
